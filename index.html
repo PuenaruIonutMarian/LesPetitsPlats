@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/14273d579a.js" crossorigin="anonymous"></script>
+    <title>Petits Plats</title>
+</head>
+
+<body>
+
+    <header class="header">
+        <img class="header_logo" src="./assets/utils/logo.svg" alt="Les petits plats">
+        <div class="header_cta">
+            <h1><span>CHERCHEZ PARMI PLUS DE 1500 RECETTES</span>
+                <span>DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES</span>
+            </h1>
+            <div>
+                <input type="text" id="search-recipe" placeholder="Rechercher une recette, un ingrédient, ..."
+                    maxlength="50">
+                <button aria-hidden="true" aria-label="Clear search"></button>
+                <label for="search-recipe" tabindex="0" aria-label="Search recipe"></label>
+            </div>
+        </div>
+    </header>
+    <main>
+        <!-- FILTERS SECTION -->
+        <section>
+            <div class="filter_section">
+                <p class="recipes_count"></p>
+            </div>
+        </section>
+
+        <!-- Selection SECTION  -->
+        <section>
+            <div class="tag_section"></div>
+        </section>
+
+        <!-- RECIPIES SECTION -->
+        <section>
+            <div class="card_section"></div>
+        </section>
+
+
+    </main>
+
+
+
+
+
+    <script type="module" src="./scripts/pages/index.js"></script>
+</body>
+
+</html>
