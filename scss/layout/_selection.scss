@@ -1,0 +1,64 @@
+section {
+  &.selection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .selectors {
+      margin-left: 50px;
+    }
+
+    // Boutons
+    .selectors .btn {
+      width: 188px;
+      height: 56px;
+      padding: 17px 16px;
+      border-radius: 11px;
+      font-size: 16px;
+      margin-right: 64px;
+      text-align: left;
+      position: relative;
+
+      svg {
+        position: absolute;
+        right: 10px;
+        top: 30%;
+      }
+
+      .bi {
+        width: 20px;
+        height: 29px;
+      }
+    }
+
+    // Options de la liste déroulante
+    .dropdown-menu {
+      top: 688px;
+      left: 608px;
+      width: 188px;
+      height: 250px;
+      overflow: scroll;
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    .dropdown-menu::-webkit-scrollbar {
+      display: none;
+    }
+
+    .dropdown-toggle::after {
+      display: none;
+    }
+
+    .tag_section {
+      width: 40px;
+      background-color: blue;
+    }
+
+    .rotate {
+      transform: rotate(180deg);
+    }
+  }
+}

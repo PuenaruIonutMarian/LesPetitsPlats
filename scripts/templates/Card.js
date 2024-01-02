@@ -43,24 +43,3 @@ export default class RecipeCard {
         cardSection.innerHTML += cardContent;
     }
 }
-
-
-/* 
-                            ${this.recipe.ingredients.map(ingredient => {
-                                if (ingredient.quantity && ingredient.unit) {
-                                    return `
-                                        <li>
-                                            <span>${ingredient.ingredient}</span>
-                                            <span>${ingredient.quantity} ${ingredient.unit}</span>
-                                        </li>
-                                            `;
-                                } else {
-                                    return `
-                                        <li>
-                                            <span>${ingredient.ingredient}</span>
-                                            <span>${ingredient.quantity}</span>
-                                        </li>
-                                            `;
-                                }
-                            }).join('')} 
-*/

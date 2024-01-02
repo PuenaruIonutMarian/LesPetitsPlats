@@ -9,6 +9,7 @@
   "author": "Puenaru Ionut Marian",
   "license": "ISC",
   "dependencies": {
+    "bootstrap-icons": "^1.11.2",
     "live-server": "^1.2.2"
   }
 }
