@@ -1,7 +1,8 @@
 section {
   &.selection {
     display: flex;
-    flex-direction: row;
+    position: relative;
+    flex-direction: column;
     justify-content: space-between;
 
     .selectors {
@@ -53,12 +54,29 @@ section {
     }
 
     .tag_section {
-      width: 40px;
-      background-color: blue;
+      margin-top: 20px;
+      margin-left: 50px;
+      width: 93%;
+      // background-color: blue;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
     }
 
     .rotate {
       transform: rotate(180deg);
+    }
+
+    .recipes_count {
+      position: absolute;
+      top: 20px;
+      right: 60px;
+      color: var(--Black, #1b1b1b);
+      font-family: Anton;
+      font-size: 21px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
     }
   }
 }

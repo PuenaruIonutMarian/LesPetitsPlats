@@ -4,6 +4,8 @@ import { recipes } from '../../data/recipes.js';
 
 const allRecipes = recipes;
 const recipesContainer = document.getElementById('recipes-container');
+const recipesCounter = document.querySelector('.recipes_count');
+
 
 const displayRecipesCards = (recipesToDisplay) => {
     recipesContainer.innerHTML = ''; // suprime les cartes existantes
@@ -14,6 +16,14 @@ const displayRecipesCards = (recipesToDisplay) => {
             const templateCard = new RecipeCard(recipe);
             templateCard.createCard();
         });
+
+    // afiche le numero des recettes ou le message     
+    const numberOfRecipes = countRecipes();
+    numberOfRecipes === 0
+        ? (recipesContainer.innerHTML = "<p>Aucune recette n'a été trouvée.</p>",
+        recipesCounter.innerHTML = '')
+        : (recipesCounter.innerHTML = `${numberOfRecipes} recettes`);
+
 };
 
 const resetDisplay = () => {
@@ -55,6 +65,11 @@ const filterRecipes = (allRecipes, searchTerm) => {
 // Function to display the filtered recipes
 const displayRecipes = (filteredRecipes) => {
     displayRecipesCards(filteredRecipes);
+
+        // Display tags XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+    const tagSection = document.querySelector('.tag_section');
+    tagSection.innerHTML = '';
+    selectedTags.forEach(tagName => createTag(tagName));
 };
 
 
@@ -116,10 +131,10 @@ export const extractUniqueProperties = recipes => {
 };
 
 
-
-
 // Call the function to extract unique properties
 const uniqueProperties = extractUniqueProperties(allRecipes);
+
+
 
 // Function to generate a dropdown menu based on the extracted properties
 const generateDropdownMenu = (property, items) => {
@@ -128,9 +143,29 @@ const generateDropdownMenu = (property, items) => {
 
     items.forEach(item => {
         const listItem = document.createElement('li');
-        listItem.innerHTML = `<a class="dropdown-item" href="#">${item}</a>`;
+        listItem.innerHTML = `<a class="dropdown-item" href="#" data-property="${property}">${item}</a>`;
+
         dropdownMenu.appendChild(listItem);
+
+        // pour creer le tag 
+        listItem.addEventListener('click', handleDropdownItemClick);
+
     });
+};
+
+
+
+// Event listener for click on dropdown item
+const handleDropdownItemClick = (event) => {
+    console.log('Full Event:', event);
+  const targetItem = event.currentTarget;
+  console.log(targetItem); 
+  const itemName = targetItem.textContent.trim();
+
+  console.log('Item Name:', itemName);
+
+  // Call createTag function when a dropdown item is clicked
+  createTag(itemName);
 };
 
 // Generate dropdown menus for ingredients, appareils (formerly appliances), and ustensils
@@ -153,6 +188,83 @@ toggleIcon.forEach(btn => {
         icon.classList.toggle('rotate');
     });
 });
+
+
+
+
+////////////////////Create / Remove tag button
+
+let selectedTags = [];
+
+
+// Modify createTag function
+const createTag = ( name) => {
+    const tagSection = document.querySelector('.tag_section');
+    const tag = `
+        <div class="tag">
+            <h3>${name}</h3>
+            <button></button>
+        </div>
+    `;
+    tagSection.innerHTML += tag;
+
+    // Add the name to the selectedTags array with the corresponding property
+    selectedTags.push({  name: name.toLowerCase() });
+
+    const tagBtn = tagSection.querySelectorAll('button');
+    tagBtn.forEach(btn => btn.addEventListener('click', removeTag));
+
+    return tag;
+};
+
+
+
+// removeTag function
+const removeTag = (event) => {
+    const tag = event.target.closest('.tag');
+    const tagName = tag.textContent.trim();
+    
+    // Remove the tag from the selectedTags array
+    selectedTags = selectedTags.filter(tagData => tagData.name !== tagName.toLowerCase());
+
+    // Add your logic to filter recipes based on the selected tags and update the display
+    const inputValue = searchedItem.value;
+    filterRecipes(allRecipes, selectedTags, inputValue);
+    
+    tag.remove();
+};
+
+
+
+
+
+///test
+
+const handleInputChange = (property) => (event) => {
+    const inputValue = event.target.value;
+    // Add your logic here based on the input value and property
+    console.log(`${property} Input Changed:`, inputValue);
+};
+
+// Ingredients Input
+const ingredientsInput = document.getElementById('ingredients-search-input');
+ingredientsInput.addEventListener('input', handleInputChange('Ingredients'));
+
+// Appareils Input
+const appareilsInput = document.getElementById('appareils-search-input');
+appareilsInput.addEventListener('input', handleInputChange('Appareils'));
+
+// Ustensiles Input
+const ustensilesInput = document.getElementById('ustensiles-search-input');
+ustensilesInput.addEventListener('input', handleInputChange('Ustensiles'));
+
+
+///////////////////////COUNTER
+
+const countRecipes = () => {
+    const recipeCards = recipesContainer.querySelectorAll('.card');
+    return recipeCards.length;
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

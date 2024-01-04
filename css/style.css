@@ -226,6 +226,44 @@ body {
   color: #7a7a7a;
 }
 
+.tag {
+  width: 190px;
+  height: 60px;
+  border-radius: 10px;
+  padding: 15px;
+  font-family: "Manrope", sans-serif;
+  background-color: #ffd15b;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (max-width: 1160px) {
+  .tag {
+    padding: 10px;
+    height: 50px;
+  }
+}
+.tag h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.tag button {
+  position: relative;
+  right: 0;
+  background-color: #ffd15b;
+}
+.tag button:hover::after, .tag button:focus::after {
+  color: #fff;
+}
+.tag button::after {
+  content: "\f00d";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #1b1b1b;
+}
+
 .header {
   position: relative;
   display: flex;
@@ -394,7 +432,8 @@ main {
 
 section.selection {
   display: flex;
-  flex-direction: row;
+  position: relative;
+  flex-direction: column;
   justify-content: space-between;
 }
 section.selection .selectors {
@@ -437,11 +476,26 @@ section.selection .dropdown-toggle::after {
   display: none;
 }
 section.selection .tag_section {
-  width: 40px;
-  background-color: blue;
+  margin-top: 20px;
+  margin-left: 50px;
+  width: 93%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 section.selection .rotate {
   transform: rotate(180deg);
+}
+section.selection .recipes_count {
+  position: absolute;
+  top: 20px;
+  right: 60px;
+  color: var(--Black, #1b1b1b);
+  font-family: Anton;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 /*# sourceMappingURL=style.css.map */
