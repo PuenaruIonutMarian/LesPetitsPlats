@@ -7,6 +7,7 @@ const recipesContainer = document.getElementById('recipes-container');
 const recipesCounter = document.querySelector('.recipes_count');
 
 
+//////////////////////////FUNCTION DISPLAY RECIPES
 const displayRecipesCards = (recipesToDisplay) => {
     recipesContainer.innerHTML = ''; // suprime les cartes existantes
 
@@ -26,6 +27,8 @@ const displayRecipesCards = (recipesToDisplay) => {
 
 };
 
+
+/////////////////////////////////RESET DISPLAY
 const resetDisplay = () => {
     displayRecipesCards(allRecipes);
 };
