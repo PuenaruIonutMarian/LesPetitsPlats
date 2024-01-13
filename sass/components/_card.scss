@@ -1,0 +1,150 @@
+.card_section {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+  flex-wrap: wrap;
+  gap: 48px;
+  padding: 40px 0;
+
+  @media screen and (max-width: 1160px) {
+    gap: 30px;
+    padding: 20px 0;
+  }
+
+  @media screen and (max-width: 910px) {
+    grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+  }
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+
+  p {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-family: $texte-typo;
+  }
+
+  .card {
+    position: relative;
+    height: 731px;
+    max-width: 380px;
+    border-radius: 21px;
+    overflow: hidden;
+    background-color: $color-light;
+
+    @media screen and (max-width: 500px) {
+      height: 400px;
+    }
+
+    &_time {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-family: $texte-typo;
+      background-color: $color-primary;
+    }
+
+    img {
+      width: 100%;
+      height: 35%;
+      object-fit: cover;
+      object-position: center;
+
+      @media screen and (max-width: 500px) {
+        height: 50%;
+      }
+    }
+
+    &_infos {
+      @include flex(column);
+      height: 80%;
+      gap: 20px;
+      padding: 20px;
+      overflow-y: scroll;
+      @include scrollbar;
+
+      @media screen and (max-width: 500px) {
+        padding: 10px;
+        gap: 15px;
+      }
+
+      h2 {
+        // font-family: $title-typo;
+        // font-size: clamp(1.2rem, 2vw, 1.5rem);
+        // font-weight: 100;
+        @include title-styles;
+      }
+
+      &_instructions {
+        @include flex(column);
+        gap: 15px;
+        height: 109px;
+        font-family: $texte-typo;
+
+        @media screen and (max-width: 500px) {
+          gap: 10px;
+        }
+
+        h3 {
+          text-transform: uppercase;
+          color: $color-grey;
+          letter-spacing: 2px;
+          font-size: clamp(1rem, 1.8vw, 1.2rem);
+          font-weight: 900;
+        }
+
+        p {
+          //   font-size: 0.9rem;
+          @include text-styles;
+          overflow: hidden;
+        }
+      }
+
+      &_ingredients {
+        @include flex(column);
+        gap: 20px;
+        font-family: $texte-typo;
+
+        @media screen and (max-width: 500px) {
+          gap: 10px;
+        }
+
+        h3 {
+          margin-top: 18px;
+          text-transform: uppercase;
+          color: $color-grey;
+          letter-spacing: 2px;
+          font-size: 12px;
+          //   font-size: clamp(1rem, 1.8vw, 1.2rem);
+        }
+
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px 0;
+          font-size: clamp(1rem, 1.8vw, 1.4rem);
+
+          @media screen and (max-width: 500px) {
+            gap: 10px;
+          }
+
+          li {
+            @include flex(column);
+            font-size: 14px;
+            width: 45%;
+
+            span:nth-child(1) {
+              font-weight: bold;
+            }
+            span:nth-child(2) {
+              color: $color-grey;
+            }
+          }
+        }
+      }
+    }
+  }
+}

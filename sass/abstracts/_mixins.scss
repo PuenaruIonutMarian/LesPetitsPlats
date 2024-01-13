@@ -1,0 +1,104 @@
+@mixin title-styles {
+  font-size: 18px;
+  font-family: $title-typo;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@mixin main-title-styles {
+  color: var(--Yellow, $color-primary);
+  font-size: 44px;
+  text-align: center;
+}
+
+@mixin text-styles {
+  color: var(--Black, $color-dark);
+  font-family: $texte-typo;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    } //900px
+  }
+  @if $breakpoint == tab-land {
+    @media only screen and (max-width: 75em) {
+      @content;
+    } //1200px
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    } //1800px
+  }
+}
+////////////////////
+@mixin flex($direction, $justify: null, $align: null) {
+  display: flex;
+  flex-direction: $direction;
+
+  @if $justify {
+    justify-content: $justify;
+  }
+
+  @if $align {
+    align-items: $align;
+  }
+}
+
+@mixin font-awesome($unicode, $size, $color) {
+  content: $unicode;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 600;
+  font-size: $size;
+  color: $color;
+}
+
+@mixin button-delete($position, $right, $color-bg) {
+  position: $position;
+  right: $right;
+  @if ($position == absolute) {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  background-color: $color-bg;
+
+  &:hover::after,
+  &:focus::after {
+    @if $color-bg == $color-light {
+      color: $color-primary;
+    } @else {
+      color: $color-light;
+    }
+  }
+}
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $color-light;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-grey;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: $color-primary;
+  }
+}

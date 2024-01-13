@@ -1,0 +1,65 @@
+// *,
+// ::before,
+// ::after {
+//   box-sizing: border-box;
+//   margin: 0;
+//   padding: 0;
+// }
+
+// body {
+//   max-width: 1400px;
+//   margin: 0 auto;
+//   font-size: 62.5%;
+// }
+
+/* Reset default margin, padding, and box-sizing for all elements */
+*,
+*::after,
+*::before {
+  margin: 0;
+  /* Reset margin to 0 for all elements */
+  padding: 0;
+  /* Reset padding to 0 for all elements */
+  box-sizing: border-box;
+  /* Inherit box-sizing from parent elements */
+}
+
+/* Set the base font size for the document */
+html {
+  font-size: 62.5%;
+
+  @include respond(tab-land) {
+    //width < 1200
+    font-size: 56.25%; //1rem should be 9px, 9/16=56.25%
+  }
+
+  @include respond(tab-port) {
+    // width < 900
+    font-size: 50%; //1rem should be 8px, 8/16=50%
+  }
+
+  @include respond(big-desktop) {
+    font-size: 75%; //1rem should be 12px, 12/16=75%
+  }
+}
+
+body {
+  margin: 0 auto;
+  max-width: 144rem;
+}
+
+label,
+button,
+input {
+  border: none;
+  outline: none;
+}
+
+button,
+label {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
