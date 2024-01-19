@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/RecipeCard.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/RecipeCard.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Represents a Recipe Card to display recipe information.
+ */
+export default class RecipeCard {
+        /**
+     * Creates an instance of RecipeCard.
+     * @param {Recipe} recipe - The recipe object to display.
+     */
+    constructor(recipe) {
+        this.recipe = recipe;
+    }
+
+    /**
+     * Creates the HTML structure for the recipe card and appends it to the card section.
+     */
+    createCard() {
+         // Get the card section element from the DOM
+        const cardSection = document.querySelector('.cards_section');
+
+        // Create the HTML content for the recipe card
+        const cardContent = `
+            &lt;article class="card" data-id=${this.recipe.id}>
+                ${
+                    this.recipe.time > 0
+                        ? ` &lt;p class="card_time">
+                            ${
+                                this.recipe.time > 60
+                                    ? `${Math.floor(this.recipe.time / 60)} h ${this.recipe.time % 60}`
+                                    : `${this.recipe.time} min`
+                            }
+                            &lt;/p>`
+                        : ''
+                }
+                &lt;img src="./images/recipes/${this.recipe.image}" alt="${this.recipe.name}">
+                &lt;div class="card_infos">
+                    &lt;h2>${this.recipe.name}&lt;/h2>
+                    &lt;div class="card_infos_instructions">
+                        &lt;h3>Recette&lt;/h3>
+                        &lt;p>${this.recipe.description}&lt;/p>
+                    &lt;/div>
+                    &lt;div class="card_infos_ingredients">
+                        &lt;h3>Ingrédients&lt;/h3>
+                        &lt;ul>
+                            ${this.recipe.ingredients.map(ingredient => `
+                                &lt;li>
+                                    &lt;span>${ingredient.ingredient}&lt;/span>
+                                    ${ingredient.quantity ? `&lt;span>${ingredient.quantity} ${ingredient.unit || ''}&lt;/span>` : ''}
+                                &lt;/li>`
+                            ).join('')} 
+                        &lt;/ul>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/article>
+        &lt;/section>
+        `;
+        
+        // Append the card content to the card section
+        cardSection.innerHTML += cardContent;
+    }
+}
+
+//VAR 1
+                    // &lt;div class="card_infos_ingredients">
+                    //     &lt;h3>Ingrédients&lt;/h3>
+                    //     &lt;ul>
+                    //         ${this.recipe.ingredients.map(ingredient => {
+                    //             if (ingredient.quantity &amp;&amp; ingredient.unit) {
+                    //                 return `
+                    //                     &lt;li>
+                    //                         &lt;span>${ingredient.ingredient}&lt;/span>
+                    //                         &lt;span>${ingredient.quantity} ${ingredient.unit}&lt;/span>
+                    //                     &lt;/li>
+                    //                         `;
+                    //             } else {
+                    //                 return `
+                    //                     &lt;li>
+                    //                         &lt;span>${ingredient.ingredient}&lt;/span>
+                    //                     &lt;/li>
+                    //                         `;
+                    //             }
+                    //         }).join('')} 
+                    //     &lt;/ul>
+                    // &lt;/div>
+
+
+//VAR 2 
+                    // &lt;div class="card_infos_ingredients">
+                    //     &lt;h3>Ingrédients&lt;/h3>
+                    //     &lt;ul>
+                    //         ${this.recipe.ingredients.map(ingredient => `
+                    //             &lt;li>
+                    //                 &lt;span>${ingredient.ingredient}&lt;/span>
+                    //                 &lt;span>${ingredient.quantity}${ingredient.unit ? ` ${ingredient.unit}` : ''}&lt;/span>
+                    //             &lt;/li>
+                    //         `).join('')} 
+                    //     &lt;/ul>
+                    // &lt;/div>
+
+//var 3 
+
+// &lt;div class="card_infos_ingredients">
+//                         &lt;h3>Ingrédients&lt;/h3>
+//                         &lt;ul>
+//                             ${this.recipe.ingredients.map(ingredient => {
+//                                 if (ingredient.quantity &amp;&amp; ingredient.unit) {
+//                                     return `
+//                                         &lt;li>
+//                                             &lt;span>${ingredient.ingredient}&lt;/span>
+//                                             &lt;span>${ingredient.quantity} ${ingredient.unit}&lt;/span>
+//                                         &lt;/li>
+//                                             `;
+//                                 }else if(ingredient.quantity &amp;&amp; !ingredient.unit){
+//                                     return`
+//                                         &lt;li>
+//                                             &lt;span>${ingredient.ingredient}&lt;/span>
+//                                             &lt;span>${ingredient.quantity}&lt;/span>
+//                                         &lt;/li> `  
+//                                 } else {
+//                                     return `
+//                                         &lt;li>
+//                                             &lt;span>${ingredient.ingredient}&lt;/span>
+//                                         &lt;/li>
+//                                             `;
+//                                 }
+//                             }).join('')} 
+//                         &lt;/ul>
+//                     &lt;/div></code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Search.html">Search</a></li><li><a href="module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allRecipes">allRecipes</a></li><li><a href="global.html#cleanString">cleanString</a></li><li><a href="global.html#closeOtherDropdowns">closeOtherDropdowns</a></li><li><a href="global.html#createCard">createCard</a></li><li><a href="global.html#createDropdown">createDropdown</a></li><li><a href="global.html#createTag">createTag</a></li><li><a href="global.html#currentRecipes">currentRecipes</a></li><li><a href="global.html#displayDropdownSection">displayDropdownSection</a></li><li><a href="global.html#dropdownValues">dropdownValues</a></li><li><a href="global.html#dropdowns">dropdowns</a></li><li><a href="global.html#focusableElements">focusableElements</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#openCloseDropdown">openCloseDropdown</a></li><li><a href="global.html#removeTag">removeTag</a></li><li><a href="global.html#resetItemList">resetItemList</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#selectedTags">selectedTags</a></li><li><a href="global.html#tagHandler">tagHandler</a></li><li><a href="global.html#toggleDeleteBtn">toggleDeleteBtn</a></li><li><a href="global.html#toggleDropdown">toggleDropdown</a></li><li><a href="global.html#updateItems">updateItems</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Jan 19 2024 17:51:54 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

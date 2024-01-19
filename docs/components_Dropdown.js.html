@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Dropdown.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Dropdown.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {
+    cleanString
+} from '../utils/cleanString.js';
+
+/**
+ * Dropdown class represents a dropdown menu with filtering and search functionality.
+ */
+export default class Dropdown {
+        /**
+     * Creates an instance of Dropdown.
+     * @param {string} name - The name of the dropdown.
+     * @param {string[]} items - The list of items in the dropdown.
+     * @param {Search} searchInstance - An instance of the Search class for tag handling.
+     */
+    constructor(name, items, searchInstance) {
+        this.name = name;
+        this.items = items;
+        this.filteredItems = [];
+        this.itemList = null;
+        this.searchInstance = searchInstance;
+        //console.log('searchInstance:', this.searchInstance);
+        
+    }
+
+        /**
+     * Creates the HTML structure for the dropdown and sets up event listeners.
+     * @returns {HTMLElement} - The HTML element representing the dropdown.
+     */
+    createDropdown() {
+        const dropdownContent = `
+                &lt;div class="dropdown"> 
+                    &lt;button class="dropdown_btn" type="button">
+                        &lt;span>${this.name}&lt;/span>
+                        &lt;span class="fa-solid fa-chevron-down" aria-hidden="true">&lt;/span>
+                    &lt;/button>
+
+                    &lt;div class="dropdown_content">
+                        &lt;div>
+                            &lt;input tabindex="-1" type="text" id="search-${this.name}" maxlength="12">
+                            &lt;button tabindex="-1">&lt;/button>
+                            &lt;label for="search-${this.name}" aria-label="Search by ${this.name}">&lt;/label>
+                        &lt;/div>
+                        &lt;ul class="dropdown_content_list">
+                            ${this.items.map(item => `&lt;li>${item}&lt;/li>`).join('')}
+                        &lt;/ul>
+                    &lt;/div>
+                &lt;/div>                          
+        `;
+        const dropdownWrapper = document.createElement('div');
+        dropdownWrapper.setAttribute('class', 'dropdown_wrapper');
+        dropdownWrapper.innerHTML = dropdownContent;
+
+        const inputElement = dropdownWrapper.querySelector(`#search-${this.name}`);
+        this.itemList = dropdownWrapper.querySelectorAll('.dropdown_content_list li');
+
+
+        inputElement.addEventListener('input', () => {
+            this.search(cleanString(inputElement.value));
+            this.toggleDeleteBtn(inputElement);
+        });
+
+        this.tagHandler(inputElement);
+
+        return dropdownWrapper;
+    }
+
+
+    /**
+     * Updates the displayed items in the dropdown based on the filtered items.
+     * @param {string[]} filteredItems - The filtered items to be displayed.
+     * @param {string} [_inputValue] - The input value from the search.
+     * @param {string[]} [match] - The matching items for the input value.
+     */
+    updateItems(filteredItems, _inputValue, match) {
+        this.filteredItems = filteredItems;
+
+        this.itemList.forEach(item => (item.style.display = 'none'));
+
+        let items = match ? match : this.filteredItems;
+
+        items.forEach(itemText => {
+            const itemElement = [...this.itemList].find(
+                (item) => cleanString(item.textContent) === cleanString(itemText)
+            );
+            if (itemElement) itemElement.style.display = 'block';
+        });
+    }
+
+
+    /**
+     * Searches for items that match the input value and updates the displayed items.
+     * @param {string} inputValue - The input value for searching.
+     */
+    search(inputValue) {
+        const itemsToSearch = !this.filteredItems.length ? this.items : this.filteredItems;
+
+        const match = itemsToSearch.filter(item => {
+            const normalizedItem = cleanString(item);
+            return normalizedItem.includes(inputValue);
+        });
+
+        this.updateItems(this.filteredItems, inputValue, match)
+    }
+
+
+    /**
+     * Resets the displayed item list in the dropdown.
+     */
+    resetItemList() {
+        this.itemList.forEach((item) => (item.style.display = 'block'));
+        this.filteredItems = [];
+    }
+
+
+        /**
+     * Toggles the visibility of the delete button based on the input value.
+     * @param {HTMLInputElement} inputElement - The input element of the dropdown.
+     */
+    toggleDeleteBtn(inputElement) {
+        const btnDelete = inputElement.nextElementSibling;
+        const inputValue = inputElement.value;
+        inputValue.length > 0 ? (btnDelete.style.display = 'block') : (btnDelete.style.display = 'none');
+
+        btnDelete.addEventListener('click', () => {
+            inputElement.value = '';
+            btnDelete.style.display = 'none';
+
+            const itemsToReset = !this.filteredItems.length ? this.items : this.filteredItems;
+            this.updateItems(itemsToReset, inputValue, null);
+        });
+    }
+
+
+     /**
+     * Handles click and Enter key events on dropdown items to add tags.
+     * @param {HTMLInputElement} inputElement - The input element of the dropdown.
+     */
+    tagHandler(inputElement) {
+        this.itemList.forEach((item) => {
+            item.addEventListener('click', () => {
+                this.searchInstance.addTag(item.textContent);
+                inputElement.value = '';
+            });
+
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') this.searchInstance.addTag(item.textContent);
+                inputElement.value = '';
+            });
+        });
+    }
+
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Search.html">Search</a></li><li><a href="module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allRecipes">allRecipes</a></li><li><a href="global.html#cleanString">cleanString</a></li><li><a href="global.html#closeOtherDropdowns">closeOtherDropdowns</a></li><li><a href="global.html#createCard">createCard</a></li><li><a href="global.html#createDropdown">createDropdown</a></li><li><a href="global.html#createTag">createTag</a></li><li><a href="global.html#currentRecipes">currentRecipes</a></li><li><a href="global.html#displayDropdownSection">displayDropdownSection</a></li><li><a href="global.html#dropdownValues">dropdownValues</a></li><li><a href="global.html#dropdowns">dropdowns</a></li><li><a href="global.html#focusableElements">focusableElements</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#openCloseDropdown">openCloseDropdown</a></li><li><a href="global.html#removeTag">removeTag</a></li><li><a href="global.html#resetItemList">resetItemList</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#selectedTags">selectedTags</a></li><li><a href="global.html#tagHandler">tagHandler</a></li><li><a href="global.html#toggleDeleteBtn">toggleDeleteBtn</a></li><li><a href="global.html#toggleDropdown">toggleDropdown</a></li><li><a href="global.html#updateItems">updateItems</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Jan 19 2024 17:51:54 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
