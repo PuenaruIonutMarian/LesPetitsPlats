@@ -50,6 +50,7 @@ class Search {
 
     /**
    * Updates the UI with the filtered recipes.
+   * It dynamically generates and displays recipe cards in the HTML document based on the filtered recipes. It also updates dropdown menus with the filtered items.
    * @param {Array} filteredRecipes - The array of recipes to display.
    */
   updateWithFilteredRecipes(filteredRecipes) {
@@ -86,19 +87,19 @@ class Search {
 
 
   /**
+   *This method updates the currentRecipes array with the recipes provided in the filteredRecipes array. It clears the current content of currentRecipes using splice and replaces it with the content of filteredRecipes.
    * Updates the array of current recipes.
    * @param {Array} filteredRecipes - The array of recipes to set as current.
    */
   updateCurrentRecipes = filteredRecipes => {
   currentRecipes.splice(0,currentRecipes.length, ...filteredRecipes);
-  // console.log('all recipes', this.allRecipes) 
-  // console.log('current recipes', currentRecipes) 
-  // console.log(document.querySelectorAll('.card').length);
   };
 
 
     /**
    * Sets up the search bar functionality.
+   * The searchBar method sets up event listeners for the search input and delete button, allowing the user to interact with the search functionality. 
+   * It dynamically updates the content based on the search input and selected tags.
    */
   searchBar() {
     const resetContent = () => {
@@ -142,6 +143,7 @@ class Search {
 
     /**
    * Filters recipes based on the search input.
+   *  It normalizes the input value, applies the filter, and then updates the current recipes and the UI using the updateCurrentRecipes and updateWithFilteredRecipes methods.
    * @param {Array} recipes - The array of recipes to filter.
    * @param {string} inputValue - The search input value.
    */
@@ -169,6 +171,7 @@ class Search {
 
   /**
    * Filters recipes based on the selected tags.
+   * It normalizes the tags, applies the filter, and updates the current recipes and the UI.
    * @param {Array} recipes - The array of recipes to filter.
    * @param {Array} tags - The array of selected tags.
    */
@@ -206,7 +209,7 @@ class Search {
 
 
   /**
-   * Adds a tag to the selected tags and filters recipes accordingly.
+   * Adds a tag to the selected tags, creates a corresponding UI element (Tag), and then filters recipes based on the updated set of selected tags.
    * @param {string} tagText - The text of the tag to add.
    */
   addTag(tagText) {
@@ -221,13 +224,16 @@ class Search {
 
   /**
    * Filters recipes based on tags, input value, or both.
+   * It checks for matches in the recipes array based on the normalized tags and input value. The filtered recipes are then updated using the updateCurrentRecipes method, and the UI is updated with the filtered recipes using the updateWithFilteredRecipes method.
    * @param {Array} recipes - The array of recipes to filter.
    * @param {Array} tags - The array of selected tags.
    * @param {string} inputValue - The search input value.
    */
   filterRecipes = (recipes, tags, inputValue) => {
+
       const normalizedTags = tags.map(tag => cleanString(tag));
       const normalizedInputValue = cleanString(inputValue);
+
 
       const filteredRecipes = recipes.filter(recipe => {
           const { appliance, ustensils, ingredients, name } = recipe;
@@ -246,13 +252,15 @@ class Search {
       });
 
       // this.updateCurrentRecipes(this.allRecipes);
-      this.updateCurrentRecipes(currentRecipes);
+      // this.updateCurrentRecipes(currentRecipes);
+      this.updateCurrentRecipes(filteredRecipes);
       this.updateWithFilteredRecipes(filteredRecipes);
   };
 
 
   /**
    * Initializes the search functionality.
+   * It displays the initial set of recipe cards, sets up the search bar event listeners, and hides the delete button.
    */
   initialize() {
     this.displayRecipesCards(this.allRecipes);
@@ -262,8 +270,3 @@ class Search {
 }
 
 export default Search;
-
-
-
-
-

@@ -317,7 +317,7 @@ class Search {
         }
     }
 
-    this.updateCurrentRecipes(currentRecipes);
+    this.updateCurrentRecipes(filteredRecipes);
     this.updateWithFilteredRecipes(filteredRecipes);
 }
 

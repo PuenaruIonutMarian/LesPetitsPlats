@@ -61,7 +61,6 @@ export default class Tag {
           this.searchInstance.filterRecipes(this.searchInstance.allRecipes, [], inputValue);
           // this.searchInstance.filterRecipesBySearch(this.searchInstance.allRecipes, inputValue);
         }
-
         // Remove the tag from the UI
         tag.remove();
       }

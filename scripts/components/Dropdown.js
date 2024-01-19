@@ -126,7 +126,9 @@ export default class Dropdown {
             btnDelete.style.display = 'none';
 
             const itemsToReset = !this.filteredItems.length ? this.items : this.filteredItems;
+            
             this.updateItems(itemsToReset, inputValue, null);
+
         });
     }
 
