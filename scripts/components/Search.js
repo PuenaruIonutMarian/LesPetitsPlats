@@ -23,8 +23,8 @@ class Search {
     this.selectedTags = [];
     this.searchInput = document.querySelector('#search-recipe');
     this.btnDelete = document.querySelector('.header_cta div button');
-    this.cardSection = document.querySelector('.card_section');
-    this.numberOfRecipes = document.querySelector('.recipes_count');
+    this.cardSection = document.querySelector('.cards_section');
+    this.numberOfRecipes = document.querySelector('.recipes_counter');
   }
 
 
@@ -53,15 +53,13 @@ class Search {
    * @param {Array} filteredRecipes - The array of recipes to display.
    */
   updateWithFilteredRecipes(filteredRecipes) {
-    const cardSection = document.querySelector('.card_section');
-    const numberOfRecipes = document.querySelector('.recipes_count');
 
     if (!filteredRecipes.length) {
-      cardSection.innerHTML = "<p>Aucune recette n'a été trouvée.</p>";
-      numberOfRecipes.textContent = ``;
+      this.cardSection.innerHTML = "<p>Aucune recette n'a été trouvée.</p>";
+      this.numberOfRecipes.textContent = ``;
     } else {
-      cardSection.innerHTML = "";
-      numberOfRecipes.textContent = `${filteredRecipes.length} ${filteredRecipes.length === 1 ? 'recette' : 'recettes'}`;
+      this.cardSection.innerHTML = "";
+      this.numberOfRecipes.textContent = `${filteredRecipes.length} ${filteredRecipes.length === 1 ? 'recette' : 'recettes'}`;
 
       filteredRecipes
         .map(recipe => new Recipe(recipe))

@@ -43,7 +43,7 @@ export const search = new Search(allRecipes,selectedTags);
  * Displays the dropdown section with filters.
  */
 export const displayDropdownSection = () => {
-  const numberOfRecipes = document.querySelector('.recipes_count');
+  const numberOfRecipes = document.querySelector('.recipes_counter');
   numberOfRecipes.textContent = `${allRecipes.length} recettes`;
 
     // Creating dropdowns for Ingredients, Appareils, and Ustensiles
@@ -51,7 +51,7 @@ export const displayDropdownSection = () => {
   dropdowns.push(new Dropdown('Appareils', dropdownValues(allRecipes).appliances, search));
   dropdowns.push(new Dropdown('Ustensiles', dropdownValues(allRecipes).ustensils, search));
 
-  const filterSection = document.querySelector('.filter_section');
+  const filterSection = document.querySelector('.filters_section');
 
   // Inserting dropdowns into the filter section
   dropdowns.forEach(dropdown => filterSection.insertBefore(dropdown.createDropdown(), numberOfRecipes));

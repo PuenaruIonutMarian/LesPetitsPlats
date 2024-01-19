@@ -15,7 +15,7 @@ export default class RecipeCard {
      */
     createCard() {
          // Get the card section element from the DOM
-        const cardSection = document.querySelector('.card_section');
+        const cardSection = document.querySelector('.cards_section');
 
         // Create the HTML content for the recipe card
         const cardContent = `

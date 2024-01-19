@@ -18,7 +18,7 @@ export default class Tag {
      */
     createTag() {
         // Get the tag section element from the DOM
-        const tagSection = document.querySelector('.tag_section');
+        const tagSection = document.querySelector('.tags_section');
 
         // Create a new div element for the tag
         const tag = document.createElement('div');
