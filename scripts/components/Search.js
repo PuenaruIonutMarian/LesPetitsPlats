@@ -102,36 +102,56 @@ class Search {
    * It dynamically updates the content based on the search input and selected tags.
    */
   searchBar() {
+    // Function to reset the content of the search
     const resetContent = () => {
+      // Clear the displayed recipes
       this.cardSection.innerHTML = '';
+      // Update the counter with the total number of recipes
       this.numberOfRecipes.textContent = `${this.allRecipes.length} recipes`;
+      // Display all recipes in the card section
       this.displayRecipesCards(this.allRecipes);
+      // Update the current recipes with all recipes
       this.updateCurrentRecipes(this.allRecipes);
+      // Reset the items in all dropdowns
       dropdowns.forEach(dropdown => dropdown.resetItemList());
     };
 
+    // Function to update the content based on the search input
     const updateContent = () => {
+      // Get the lowercase value of the search input
       const searchInputValue = this.searchInput.value.toLowerCase();
+      // Show or hide the delete button based on the search input length
       this.btnDelete.style.display = searchInputValue.length > 0 ? 'block' : 'none';
 
+      // If search input length is greater than 2, filter recipes
       if (searchInputValue.length > 2) {
+        // Check if tags are selected, filter by tags, otherwise use all recipes
         const recipesToFilter = this.selectedTags.length > 0 ? this.recipesFilteredByTag : this.allRecipes;
         this.filterRecipesBySearch(recipesToFilter, searchInputValue);
       }
 
-      if (!this.searchInput.value && this.selectedTags.length > 0) {
+      // If search input is empty and tags are selected, filter by tags
+      else if (!this.searchInput.value && this.selectedTags.length > 0) {
         this.filterRecipesByTags(this.allRecipes, this.selectedTags);
-      } else if (!this.searchInput.value && this.selectedTags.length === 0) {
+      }
+
+      // If search input is empty and no tags selected, reset content
+      else if (!this.searchInput.value && this.selectedTags.length === 0) {
         resetContent();
       }
     };
 
+    // Event listener for input changes to trigger content update
     this.searchInput.addEventListener('input', updateContent);
 
+    // Event listener for delete button click to clear search input
     this.btnDelete.addEventListener('click', () => {
+      // Clear search input value
       this.searchInput.value = '';
+      // Hide the delete button
       this.btnDelete.style.display = 'none';
 
+      // If tags are selected, filter by tags, otherwise reset content
       if (this.selectedTags.length > 0) {
         this.filterRecipesByTags(this.allRecipes, this.selectedTags);
       } else if (this.selectedTags.length === 0) {
@@ -139,6 +159,7 @@ class Search {
       }
     });
   }
+
 
 
     /**

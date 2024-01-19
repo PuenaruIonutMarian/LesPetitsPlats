@@ -28,7 +28,7 @@ class Search {
   }
 
 
-    /**
+  /**
    * Extracts unique items from the given recipes.
    * @param {Array} filteredRecipes - The array of recipes to extract items from.
    * @returns {Array} - The array of unique items.
@@ -52,13 +52,11 @@ class Search {
   }
 
 
-    /**
+  /**
    * Updates the UI with the filtered recipes.
    * @param {Array} filteredRecipes - The array of recipes to display.
    */
   updateWithFilteredRecipes(filteredRecipes) {
-    // const cardSection = document.querySelector('.cards_section');
-    // const numberOfRecipes = document.querySelector('.recipes_counter');
 
     if (!filteredRecipes.length) {
       this.cardSection.innerHTML = "<p>Aucune recette n'a été trouvée.</p>";
@@ -82,7 +80,7 @@ class Search {
   }
 
 
-    /**
+  /**
    * Displays recipe cards in the UI.
    * @param {Array} recipes - The array of recipes to display.
    */
@@ -96,7 +94,7 @@ class Search {
   }
 
 
-    /**
+  /**
    * Updates the array of current recipes.
    * @param {Array} filteredRecipes - The array of recipes to set as current.
    */
@@ -107,55 +105,84 @@ class Search {
     }
   }
 
-
-    /**
+  /**
    * Sets up the search bar functionality.
    */
-  searchBar() {
-    const resetContent = () => {
-      this.cardSection.innerHTML = '';
-      this.numberOfRecipes.textContent = this.allRecipes.length + ' recettes';
-      this.displayRecipesCards(this.allRecipes);
-      this.updateCurrentRecipes(this.allRecipes);
+searchBar() {
+  // Function to reset the content of the search
+  const resetContent = () => {
+    // Clear the displayed recipes
+    this.cardSection.innerHTML = '';
+    // Update the counter with the total number of recipes
+    this.numberOfRecipes.textContent = this.allRecipes.length + ' recettes';
+    // Display all recipes in the card section
+    this.displayRecipesCards(this.allRecipes);
+    // Update the current recipes with all recipes
+    this.updateCurrentRecipes(this.allRecipes);
 
-      for (let i = 0; i < dropdowns.length; i++) {
-          const dropdown = dropdowns[i];
-          dropdown.resetItemList();
-      }
-    };
+    // Reset the items in all dropdowns
+    for (let i = 0; i < dropdowns.length; i++) {
+      const dropdown = dropdowns[i];
+      dropdown.resetItemList();
+    }
+  };
 
-    const updateContent = () => {
-      const searchInputValue = this.searchInput.value.toLowerCase();
-      this.btnDelete.style.display = searchInputValue.length > 0 ? 'block' : 'none';
+  // Function to update the content based on the search input
+  const updateContent = () => {
+    // Get the lowercase value of the search input
+    const searchInputValue = this.searchInput.value.toLowerCase();
 
-      if (searchInputValue.length > 2) {
-        let recipesToFilter = this.selectedTags.length > 0 ? this.recipesFilteredByTag : this.allRecipes;
-        this.filterRecipesBySearch(recipesToFilter, searchInputValue);
-      }
-
-      if (!this.searchInput.value && this.selectedTags.length > 0) {
-        this.filterRecipesByTags(this.allRecipes, this.selectedTags);
-      } else if (!this.searchInput.value && this.selectedTags.length === 0) {
-        resetContent();
-      }
-    };
-
-    this.searchInput.addEventListener('input', updateContent);
-
-    this.btnDelete.addEventListener('click', () => {
-      this.searchInput.value = '';
+    // Show or hide the delete button based on the search input length
+    if (searchInputValue.length > 0) {
+      this.btnDelete.style.display = 'block';
+    } else {
       this.btnDelete.style.display = 'none';
+    }
 
+    // If search input length is greater than 2, filter recipes
+    if (searchInputValue.length > 2) {
+      let recipesToFilter;
+      // Check if tags are selected, filter by tags, otherwise use all recipes
       if (this.selectedTags.length > 0) {
-        this.filterRecipesByTags(this.allRecipes, this.selectedTags);
-      } else if (this.selectedTags.length === 0) {
-        resetContent();
+        recipesToFilter = this.recipesFilteredByTag;
+      } else {
+        recipesToFilter = this.allRecipes;
       }
-    });
-  }
+      this.filterRecipesBySearch(recipesToFilter, searchInputValue);
+    }
+
+    // If search input is empty and tags are selected, filter by tags
+    else if (!this.searchInput.value && this.selectedTags.length > 0) {
+      this.filterRecipesByTags(this.allRecipes, this.selectedTags);
+    }
+    // If search input is empty and no tags selected, reset content
+    else if (!this.searchInput.value && this.selectedTags.length === 0) {
+      resetContent();
+    }
+  };
+
+  // Event listener for input changes to trigger content update
+  this.searchInput.addEventListener('input', updateContent);
+
+  // Event listener for delete button click to clear search input
+  this.btnDelete.addEventListener('click', () => {
+    // Clear search input value
+    this.searchInput.value = '';
+    // Hide the delete button
+    this.btnDelete.style.display = 'none';
+
+    // If tags are selected, filter by tags, otherwise reset content
+    if (this.selectedTags.length > 0) {
+      this.filterRecipesByTags(this.allRecipes, this.selectedTags);
+    } else if (this.selectedTags.length === 0) {
+      resetContent();
+    }
+  });
+}
 
 
-   /**
+
+  /**
    * Filters recipes based on the search input.
    * @param {Array} recipes - The array of recipes to filter.
    * @param {string} inputValue - The search input value.
@@ -196,7 +223,7 @@ class Search {
   }
 
 
-    /**
+  /**
    * Filters recipes based on the selected tags.
    * @param {Array} recipes - The array of recipes to filter.
    * @param {Array} tags - The array of selected tags.
@@ -246,7 +273,7 @@ class Search {
   }
 
 
-    /**
+  /**
    * Adds a tag to the selected tags and filters recipes accordingly.
    * @param {string} tagText - The text of the tag to add.
    */
@@ -260,66 +287,80 @@ class Search {
   }
 
 
-    /**
+  /**
    * Filters recipes based on tags, input value, or both.
    * @param {Array} recipes - The array of recipes to filter.
    * @param {Array} tags - The array of selected tags.
    * @param {string} inputValue - The search input value.
    */
- filterRecipes(recipes, tags, inputValue) {
-    const normalizedTags = [];
-    for (let i = 0; i < tags.length; i++) {
+    filterRecipes = (recipes, tags, inputValue) => {
+      const normalizedTags = [];
+      for (let i = 0; i < tags.length; i++) {
         normalizedTags.push(cleanString(tags[i]));
-    }
-    const normalizedInputValue = cleanString(inputValue);
-    const filteredRecipes = [];
+      }
+      const normalizedInputValue = cleanString(inputValue);
 
-    for (let i = 0; i < recipes.length; i++) {
+      const filteredRecipes = [];
+      for (let i = 0; i < recipes.length; i++) {
         const recipe = recipes[i];
         const { appliance, ustensils, ingredients, name } = recipe;
 
         let tagsMatch = normalizedTags.length === 0;
 
         for (let j = 0; j < normalizedTags.length; j++) {
-            const tag = normalizedTags[j];
-            let tagIncluded = false;
+          const tag = normalizedTags[j];
+          let tagIncluded = false;
 
-            const itemsToCheck = [cleanString(appliance), ...ustensils.map(cleanString), ...ingredients.map(ingredient => cleanString(ingredient.ingredient))];
+          const itemsToCheck = [cleanString(appliance)];
+          for (let k = 0; k < ustensils.length; k++) {
+            itemsToCheck.push(cleanString(ustensils[k]));
+          }
+          for (let k = 0; k < ingredients.length; k++) {
+            itemsToCheck.push(cleanString(ingredients[k].ingredient));
+          }
 
-            for (let k = 0; k < itemsToCheck.length; k++) {
-                const item = itemsToCheck[k];
-                if (item.includes(tag)) {
-                    tagIncluded = true;
-                    break;
-                }
+          for (let k = 0; k < itemsToCheck.length; k++) {
+            const item = itemsToCheck[k];
+            if (item.indexOf(tag) !== -1) {
+              tagIncluded = true;
+              break;
             }
+          }
 
-            if (!tagIncluded) {
-                tagsMatch = false;
-                break;
-            }
+          if (!tagIncluded) {
+            tagsMatch = false;
+            break;
+          }
         }
 
         let searchMatch = !normalizedInputValue;
 
-        const itemsToCheck = [cleanString(appliance), ...ustensils.map(cleanString), ...ingredients.map(ingredient => cleanString(ingredient.ingredient)), cleanString(name)];
+        const itemsToCheck = [cleanString(appliance)];
+        for (let k = 0; k < ustensils.length; k++) {
+          itemsToCheck.push(cleanString(ustensils[k]));
+        }
+        for (let k = 0; k < ingredients.length; k++) {
+          itemsToCheck.push(cleanString(ingredients[k].ingredient));
+        }
+        itemsToCheck.push(cleanString(name));
 
         for (let k = 0; k < itemsToCheck.length; k++) {
-            const item = itemsToCheck[k];
-            if (item.includes(normalizedInputValue)) {
-                searchMatch = true;
-                break;
-            }
+          const item = itemsToCheck[k];
+          if (item.indexOf(normalizedInputValue) !== -1) {
+            searchMatch = true;
+            break;
+          }
         }
 
         if (tagsMatch && searchMatch) {
-            filteredRecipes.push(recipe);
+          filteredRecipes.push(recipe);
         }
-    }
+      }
 
-    this.updateCurrentRecipes(filteredRecipes);
-    this.updateWithFilteredRecipes(filteredRecipes);
-}
+      this.updateCurrentRecipes(filteredRecipes);
+      this.updateWithFilteredRecipes(filteredRecipes);
+    };
+
 
   /**
    * Initializes the search functionality.
