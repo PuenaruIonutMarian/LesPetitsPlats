@@ -2,16 +2,30 @@ import {
     cleanString
 } from '../utils/cleanString.js';
 
-
+/**
+ * Dropdown class represents a dropdown menu with filtering and search functionality.
+ */
 export default class Dropdown {
+        /**
+     * Creates an instance of Dropdown.
+     * @param {string} name - The name of the dropdown.
+     * @param {string[]} items - The list of items in the dropdown.
+     * @param {Search} searchInstance - An instance of the Search class for tag handling.
+     */
     constructor(name, items, searchInstance) {
         this.name = name;
         this.items = items;
         this.filteredItems = [];
         this.itemList = null;
         this.searchInstance = searchInstance;
+        //console.log('searchInstance:', this.searchInstance);
+        
     }
 
+        /**
+     * Creates the HTML structure for the dropdown and sets up event listeners.
+     * @returns {HTMLElement} - The HTML element representing the dropdown.
+     */
     createDropdown() {
         const dropdownContent = `
                 <div class="dropdown"> 
@@ -50,6 +64,13 @@ export default class Dropdown {
         return dropdownWrapper;
     }
 
+
+    /**
+     * Updates the displayed items in the dropdown based on the filtered items.
+     * @param {string[]} filteredItems - The filtered items to be displayed.
+     * @param {string} [_inputValue] - The input value from the search.
+     * @param {string[]} [match] - The matching items for the input value.
+     */
     updateItems(filteredItems, _inputValue, match) {
         this.filteredItems = filteredItems;
 
@@ -65,6 +86,11 @@ export default class Dropdown {
         });
     }
 
+
+    /**
+     * Searches for items that match the input value and updates the displayed items.
+     * @param {string} inputValue - The input value for searching.
+     */
     search(inputValue) {
         const itemsToSearch = !this.filteredItems.length ? this.items : this.filteredItems;
 
@@ -77,11 +103,19 @@ export default class Dropdown {
     }
 
 
+    /**
+     * Resets the displayed item list in the dropdown.
+     */
     resetItemList() {
         this.itemList.forEach((item) => (item.style.display = 'block'));
         this.filteredItems = [];
     }
 
+
+        /**
+     * Toggles the visibility of the delete button based on the input value.
+     * @param {HTMLInputElement} inputElement - The input element of the dropdown.
+     */
     toggleDeleteBtn(inputElement) {
         const btnDelete = inputElement.nextElementSibling;
         const inputValue = inputElement.value;
@@ -96,16 +130,23 @@ export default class Dropdown {
         });
     }
 
+
+     /**
+     * Handles click and Enter key events on dropdown items to add tags.
+     * @param {HTMLInputElement} inputElement - The input element of the dropdown.
+     */
     tagHandler(inputElement) {
         this.itemList.forEach((item) => {
             item.addEventListener('click', () => {
                 this.searchInstance.addTag(item.textContent);
                 inputElement.value = '';
             });
+
             item.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') this.searchInstance.addTag(item.textContent);
                 inputElement.value = '';
             });
         });
     }
+
 }

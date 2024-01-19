@@ -1,9 +1,23 @@
+/**
+ * Represents a Recipe Card to display recipe information.
+ */
 export default class RecipeCard {
+        /**
+     * Creates an instance of RecipeCard.
+     * @param {Recipe} recipe - The recipe object to display.
+     */
     constructor(recipe) {
         this.recipe = recipe;
     }
+
+    /**
+     * Creates the HTML structure for the recipe card and appends it to the card section.
+     */
     createCard() {
+         // Get the card section element from the DOM
         const cardSection = document.querySelector('.card_section');
+
+        // Create the HTML content for the recipe card
         const cardContent = `
             <article class="card" data-id=${this.recipe.id}>
                 ${
@@ -39,7 +53,8 @@ export default class RecipeCard {
             </article>
         </section>
         `;
-
+        
+        // Append the card content to the card section
         cardSection.innerHTML += cardContent;
     }
 }
