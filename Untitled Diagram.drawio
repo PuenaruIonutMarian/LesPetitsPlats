@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-01-22T16:26:19.741Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="rhH2olL7Aa-xzd8vXniU" version="22.1.21" type="github">
+<mxfile host="app.diagrams.net" modified="2024-01-22T20:18:12.884Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="GYmcIjKB2IC-1IzCtxLp" version="22.1.21" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1232" dy="1096" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -39,7 +39,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-10" value="Vérifier si des tags sont sélectionnés." style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="317.5" y="500" width="145" height="140" as="geometry" />
+          <mxGeometry x="313.75" y="482.5" width="152.5" height="160" as="geometry" />
         </mxCell>
         <mxCell id="2UsBcgrsxlk8Fz7qcO6y-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="2UsBcgrsxlk8Fz7qcO6y-0" target="WIyWlLk6GJQsqaUBKTNV-3">
           <mxGeometry relative="1" as="geometry" />
@@ -54,10 +54,10 @@
           <mxGeometry x="330" y="140" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="2UsBcgrsxlk8Fz7qcO6y-6" value="Filtrage des recettes en fonction des tags sélectionnés." style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="630" y="495" width="120" height="150" as="geometry" />
+          <mxGeometry x="630" y="485" width="160" height="155" as="geometry" />
         </mxCell>
-        <mxCell id="2UsBcgrsxlk8Fz7qcO6y-7" value="&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;Aucun tag sélectionné.&lt;/span&gt;&#xa;&#xa;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="80" y="530" width="80" height="80" as="geometry" />
+        <mxCell id="2UsBcgrsxlk8Fz7qcO6y-7" value="Affichage de toutes les recettes dans l&#39;interface utilisateur." style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="35" y="482.5" width="150" height="160" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
