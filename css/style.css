@@ -14,12 +14,12 @@
 html {
   font-size: 62.5%;
 }
-@media only screen and (max-width: 75em) {
+@media only screen and (max-width: 90em) {
   html {
     font-size: 56.25%;
   }
 }
-@media only screen and (max-width: 56.25em) {
+@media only screen and (max-width: 64em) {
   html {
     font-size: 50%;
   }
@@ -464,7 +464,7 @@ body {
   border-radius: 10px;
 }
 .header_cta div input::placeholder {
-  font-size: clamp(0.7rem, 2vw, 1.6rem);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
 }
 .header_cta div input:focus {
   outline: 2px solid #ffd15b;
