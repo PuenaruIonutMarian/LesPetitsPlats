@@ -24,11 +24,6 @@ html {
     font-size: 50%;
   }
 }
-@media only screen and (min-width: 112.5em) {
-  html {
-    font-size: 75%;
-  }
-}
 
 body {
   margin: 0 auto;
@@ -506,7 +501,7 @@ body {
   content: "\f002";
   font-family: "Font Awesome 5 Free";
   font-weight: 600;
-  font-size: 1.4rem;
+  font-size: 2.8rem;
   color: #fff;
 }
 @media screen and (max-width: 1160px) {

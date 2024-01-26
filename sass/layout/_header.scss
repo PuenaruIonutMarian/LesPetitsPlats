@@ -101,7 +101,7 @@
 
         &::after {
           //Unicode, font-size, color
-          @include font-awesome("\f002", 1.4rem, $color-light);
+          @include font-awesome("\f002", 2.8rem, $color-light);
 
           @media screen and (max-width: 1160px) {
             font-size: 1rem;

@@ -1,17 +1,3 @@
-// *,
-// ::before,
-// ::after {
-//   box-sizing: border-box;
-//   margin: 0;
-//   padding: 0;
-// }
-
-// body {
-//   max-width: 1400px;
-//   margin: 0 auto;
-//   font-size: 62.5%;
-// }
-
 /* Reset default margin, padding, and box-sizing for all elements */
 *,
 *::after,
@@ -38,9 +24,9 @@ html {
     font-size: 50%; //1rem should be 8px, 8/16=50%
   }
 
-  @include respond(big-desktop) {
-    font-size: 75%; //1rem should be 12px, 12/16=75%
-  }
+  // @include respond(big-desktop) {
+  //   font-size: 75%; //1rem should be 12px, 12/16=75%
+  // }
 }
 
 body {
