@@ -59,7 +59,6 @@ export default class Tag {
         } else {
           // If no tags are selected, reset the content
           this.searchInstance.filterRecipes(this.searchInstance.allRecipes, [], inputValue);
-          // this.searchInstance.filterRecipesBySearch(this.searchInstance.allRecipes, inputValue);
         }
         // Remove the tag from the UI
         tag.remove();

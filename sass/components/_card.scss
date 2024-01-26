@@ -72,9 +72,6 @@
       }
 
       h2 {
-        // font-family: $title-typo;
-        // font-size: clamp(1.2rem, 2vw, 1.5rem);
-        // font-weight: 100;
         @include title-styles;
       }
 
@@ -97,7 +94,6 @@
         }
 
         p {
-          //   font-size: 0.9rem;
           @include text-styles;
           overflow: hidden;
         }
@@ -118,7 +114,6 @@
           color: $color-grey;
           letter-spacing: 2px;
           font-size: 12px;
-          //   font-size: clamp(1rem, 1.8vw, 1.2rem);
         }
 
         ul {

@@ -6,12 +6,6 @@
   line-height: normal;
 }
 
-@mixin main-title-styles {
-  color: var(--Yellow, $color-primary);
-  font-size: 44px;
-  text-align: center;
-}
-
 @mixin text-styles {
   color: var(--Black, $color-dark);
   font-family: $texte-typo;
@@ -37,13 +31,8 @@
       @content;
     } //1440px
   }
-  @if $breakpoint == big-desktop {
-    @media only screen and (min-width: 112.5em) {
-      @content;
-    } //1800px
-  }
 }
-////////////////////
+
 @mixin flex($direction, $justify: null, $align: null) {
   display: flex;
   flex-direction: $direction;

@@ -18,7 +18,7 @@ export default class Dropdown {
         this.filteredItems = [];
         this.itemList = null;
         this.searchInstance = searchInstance;
-        //console.log('searchInstance:', this.searchInstance);
+
         
     }
 

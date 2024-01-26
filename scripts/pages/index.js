@@ -2,7 +2,6 @@ import { recipes } from '../../data/recipes.js';
 import Dropdown from '../components/Dropdown.js';
 import { openCloseDropdown } from '../utils/dropdownEvent.js';
 import Search from '../components/Search.js';
-// import Search from '../components/Search_Variant_2.js';
 import { dropdownValues } from '../utils/dropdownValues.js';
 
 

@@ -11,7 +11,6 @@
 
   &_btn {
     padding: 15px;
-    //flex-direction, justify-content, align-items
     @include flex(row, space-between, center);
     height: 60px;
     width: 100%;
@@ -46,7 +45,6 @@
       }
 
       label {
-        //flex-direction, justify-content, align-items
         @include flex(row, center, center);
         position: absolute;
         right: 5px;

@@ -29,7 +29,7 @@ class Search {
 
 
     /**
-   * Extracts unique items from the given recipes.
+   * Extracts unique items from the given recipes. The final purpose of this method is updating dropdown menus.
    * @param {Array} filteredRecipes - The array of recipes to extract items from.
    * @returns {Array} - The array of unique items.
    */
@@ -238,7 +238,6 @@ class Search {
       const tag = new Tag(tagText, this);
       tag.createTag();
       this.selectedTags.push(tagText);
-      // this.filterRecipesByTags(this.allRecipes, this.selectedTags);
       this.filterRecipesByTags(currentRecipes, this.selectedTags);
     }
   }
@@ -272,8 +271,7 @@ class Search {
           return tagsMatch && searchMatch;
       });
 
-      // this.updateCurrentRecipes(this.allRecipes);
-      // this.updateCurrentRecipes(currentRecipes);
+
       this.updateCurrentRecipes(filteredRecipes);
       this.updateWithFilteredRecipes(filteredRecipes);
   };
