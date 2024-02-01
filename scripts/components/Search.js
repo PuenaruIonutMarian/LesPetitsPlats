@@ -187,40 +187,43 @@ searchBar() {
    * @param {Array} recipes - The array of recipes to filter.
    * @param {string} inputValue - The search input value.
    */
-  filterRecipesBySearch(recipes, inputValue) {
-    const normalizedInputValue = cleanString(inputValue);
-    const filteredRecipes = [];
 
-    for (let i = 0; i < recipes.length; i++) {
-      const recipe = recipes[i];
-      const { description, ingredients, name } = recipe;
 
-      let match = false;
+filterRecipesBySearch(recipes, inputValue) {
+  const normalizedInputValue = cleanString(inputValue);
+  const filteredRecipes = [];
 
-      if (cleanString(description).indexOf(normalizedInputValue) !== -1) {
-        match = true;
-      } else {
-        for (let j = 0; j < ingredients.length; j++) {
-          const ingredient = ingredients[j].ingredient;
-          if (cleanString(ingredient).indexOf(normalizedInputValue) !== -1) {
-            match = true;
-            break;
-          }
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
+    const { description, ingredients, name } = recipe;
+
+    let match = false;
+
+    if (!match && cleanString(name).indexOf(normalizedInputValue) !== -1) {
+      match = true;
+    } else if (!match) {
+      for (let j = 0; j < ingredients.length; j++) {
+        const ingredient = ingredients[j].ingredient;
+        if (cleanString(ingredient).indexOf(normalizedInputValue) !== -1) {
+          match = true;
+          break;
         }
-      }
-
-      if (!match && cleanString(name).indexOf(normalizedInputValue) !== -1) {
-        match = true;
-      }
-
-      if (match) {
-        filteredRecipes.push(recipe);
       }
     }
 
-    this.updateCurrentRecipes(filteredRecipes);
-    this.updateWithFilteredRecipes(filteredRecipes);
+    else if (!match && cleanString(description).indexOf(normalizedInputValue) !== -1) {
+      match = true;
+    }
+
+    //In JavaScript, the else statement doesn't take a condition
+    if (match) {
+      filteredRecipes.push(recipe);
+    }
   }
+
+  this.updateCurrentRecipes(filteredRecipes);
+  this.updateWithFilteredRecipes(filteredRecipes);
+}
 
 
   /**
