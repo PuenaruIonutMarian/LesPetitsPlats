@@ -179,9 +179,9 @@ class Search {
       } = recipe;
 
       return (
-        cleanString(description).includes(normalizedInputValue) ||
+        cleanString(name).includes(normalizedInputValue) ||
         ingredients.some(ingredient => cleanString(ingredient.ingredient).includes(normalizedInputValue)) ||
-        cleanString(name).includes(normalizedInputValue)
+        cleanString(description).includes(normalizedInputValue)
       );
     });
 
